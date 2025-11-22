@@ -3,6 +3,7 @@ from fastapi import responses, Response
 from rich.console import Console
 import itertools
 import threading
+import inspect
 import time
 
 logger = setup_logging()
@@ -29,6 +30,17 @@ def http_return(status: int, code: str, message: str, data=None, action: str = "
             "data": data if data is not None else {}
         }
     )
+
+def auto_http_return(status_code: int, code: str, data= None):
+    caller = inspect.stack()[1].function
+    return http_return(
+        status=status_code,
+        code = code,
+        message = f"function {caller} finish",
+        data = data,
+        action = caller
+    )
+
 
 # =========================================================
 # 💬 PrintUtils

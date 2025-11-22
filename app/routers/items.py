@@ -4,10 +4,10 @@ from app.utils import *
 router = APIRouter()
 
 @router.post("/~test")
-async def run_test():
+async def test_api():
     spinner = PrintUtils()
 
     with spinner.show_spinner("    spinner test..."):
         time.sleep(3)
 
-    return http_return(200, "S001", "function run_test finish", data = {"status": "ok"}, action = "run_test")
+    return auto_http_return(200, "S001", data = {"status": "ok"})
